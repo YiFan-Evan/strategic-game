@@ -38,7 +38,7 @@
         </tr>
     </table>
 </form>
-<a href="login.jsp">登录</a>
+<a href="../src/login.jsp">登录</a>
 <div>${requestScope.cc_error}</div>
 <div>${requestScope.cc_notfound}</div>
 </body>

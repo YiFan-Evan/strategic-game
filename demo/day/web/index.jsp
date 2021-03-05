@@ -8,6 +8,6 @@
   <p>
     决策游戏
   </p>
-  <a href="login.jsp">请先登录</a>
+  <a href="../src/login.jsp">请先登录</a>
   </body>
 </html>
