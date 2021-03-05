@@ -22,8 +22,8 @@ public class UserDao {
 
     public int register(User registerUser){
         try {
-            String sql="insert into user (name ,password) values ('"+registerUser.getName()+
-                    "','"+registerUser.getPassword()+"')";
+            String sql="insert into user (name ,password,level) values ('"+registerUser.getName()+
+                    "','"+registerUser.getPassword()+"',"+"1"+")";
             return template.update(sql);
         } catch (DataAccessException e) {
             e.printStackTrace();
