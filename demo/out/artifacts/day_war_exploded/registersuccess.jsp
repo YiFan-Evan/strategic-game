@@ -15,7 +15,7 @@
 <body>N
     <%=user.getName()%>注册成功
     <% request.getSession().removeAttribute("user");%>
-    <a href="../src/login.jsp">
+    <a href="login.jsp">
         返回登陆页面
     </a>
 </body>

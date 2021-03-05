@@ -38,7 +38,7 @@
         </tr>
     </table>
 </form>
-<a href="../web/register.jsp">注册</a>
+<a href="register.jsp">注册</a>
 <div>${requestScope.cc_error}</div>
 <div>${requestScope.cc_notfound}</div>
 <div>${requestScope.login_error}</div>
