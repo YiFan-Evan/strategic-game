@@ -5,7 +5,7 @@
     <script>
         window.onload=function () {
             document.getElementById("img").onclick=function () {
-                this.src="/day/checkCodeServlet?time="+new Date().getTime();
+                this.src="checkCodeServlet?time="+new Date().getTime();
             }
         }
     </script>
@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    <form action="/day/loginServlet" method="post">
+    <form action="loginServlet" method="post">
         <table>
             <tr>
                 <td>用户名：</td>
@@ -31,14 +31,14 @@
                 <td><input type="text" name="checkCode"></td>
             </tr>
             <tr>
-                <td colspan="2"><img id="img" src="/day/checkCodeServlet"></td>
+                <td colspan="2"><img id="img" src="checkCodeServlet"></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="登录"></td>
             </tr>
         </table>
     </form>
-    <a href="">注册</a>
+    <a href="register.jsp">注册</a>
     <div>${requestScope.cc_error}</div>
     <div>${requestScope.cc_notfound}</div>
     <div>${requestScope.login_error}</div>

@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-@WebServlet("/loginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/registerServlet")
+public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
@@ -25,15 +25,15 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String checkCode_session = (String) session.getAttribute("checkCode_session");
         session.removeAttribute("checkCode_session");
-        if(checkCode_session!=null&&checkCode_session.equalsIgnoreCase(checkCode)){
-            User loginuser = new User();
-            loginuser.setName(username);
-            loginuser.setPassword(password);
+        if (checkCode_session != null && checkCode_session.equalsIgnoreCase(checkCode)) {
+            User registeruser = new User();
+            registeruser.setName(username);
+            registeruser.setPassword(password);
 
             Map<String, String[]> map = req.getParameterMap();
-            User loginUser = new User();
+            User registerUser = new User();
             try {
-                BeanUtils.populate(loginUser,map);
+                BeanUtils.populate(registerUser, map);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
@@ -41,20 +41,20 @@ public class LoginServlet extends HttpServlet {
             }
 
             UserDao dao = new UserDao();
-            User user = dao.login(loginuser);
-            if(user==null){
-                req.getRequestDispatcher("/failServlet").forward(req, resp);
-            }else{
-                req.setAttribute("user",user);
-                req.getRequestDispatcher("/successServlet").forward(req, resp);
+            int var = dao.register(registeruser);
+            if (var == 0) {
+                req.getRequestDispatcher("/registerFailServlet").forward(req, resp);
+            } else {
+                req.setAttribute("user", registeruser);
+                req.getRequestDispatcher("/registerSuccessServlet").forward(req, resp);
             }
-        }else{
-            if(checkCode_session==null){
-                req.setAttribute("cc_notfound","验证码过期");
-            }else{
-                req.setAttribute("cc_error","验证码错误");
+        } else {
+            if (checkCode_session == null) {
+                req.setAttribute("cc_notfound", "验证码过期");
+            } else {
+                req.setAttribute("cc_error", "验证码错误");
             }
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
     }
 
@@ -62,4 +62,5 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doGet(req, resp);
     }
+
 }

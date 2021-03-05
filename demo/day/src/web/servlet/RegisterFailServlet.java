@@ -1,7 +1,5 @@
 package web.servlet;
 
-import domain.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,16 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/successServlet")
-public class SuccessServlet extends HttpServlet {
-
+@WebServlet("/registerFailServlet")
+public class RegisterFailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user=(User) req.getAttribute("user");
-        req.removeAttribute("user");
-        req.getSession().setAttribute("user",user);
-        req.getSession().setAttribute("fresh","true");
-        resp.sendRedirect(req.getContextPath()+"/game.jsp");
+        req.setAttribute("register_error","用户名已被使用");
+        req.getRequestDispatcher("/register.jsp").forward(req,resp);
     }
 
     @Override
