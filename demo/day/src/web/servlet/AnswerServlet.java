@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/successServlet")
-public class SuccessServlet extends HttpServlet {
+@WebServlet("/answerServlet")
+public class AnswerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user=(User) req.getAttribute("user");
-        req.removeAttribute("user");
-        req.getSession().setAttribute("user",user);
+        Client client=(Client) req.getSession().getAttribute("client");
+        String operate = req.getParameter("operate");
+        client.answer(operate);
         resp.sendRedirect(req.getContextPath()+"/game.jsp");
     }
 
